@@ -1,67 +1,67 @@
 const input = document.getElementById('input');
-        const output = document.getElementById('output');
-        const predictions = document.getElementById('predictions');
-        const prompt = document.getElementById('prompt');
-        const inputLine = document.getElementById('input-line');
+const output = document.getElementById('output');
+const predictions = document.getElementById('predictions');
+const prompt = document.getElementById('prompt');
+const inputLine = document.getElementById('input-line');
 
         let isPromptActive = false;
 
-        const commands = {
-            help: () => '[ ' + new Date().toLocaleString() + ' ] ' + 'Available commands:\n\n' +
-                '― help    : Display this help message\n' +
-                '― about   : About TEGRA\n' +
-                '― status  : Check server status\n' +
-                '― plans   : View server plans.\n' +
-                '― start   : Join TEGRA.\n' +
-                '― contact : Contact support',
-            about: () => '[ ' + new Date().toLocaleString() + ' ] ' + 'TEGRA is a small free 24/7 host for Minecraft, Node.js, and more, based in the US. We provide free yet reliable hosting solutions for your projects. We also keep all of our code open-source, you can see it at https://github.com/TEGRAgg',
-            status: () => '[ ' + new Date().toLocaleString() + ' ] ' + 'All systems operational. Network uptime: 99.92491%.',
-            plans: () => '[ ' + new Date().toLocaleString() + ' ] ' + 'Hosting plans:\n\n' +
-                '1. None. We are free, and we use a scalable resources system so that you can upgrade your servers for free.',
-            start: () => '[ ' + new Date().toLocaleString() + ' ] ' + 'Ah, that one is easy. Just go to https://app.tegra.gg/ and click the big Login with Discord button. If you need support, have a look at the support command.',
-            contact: () => '[ ' + new Date().toLocaleString() + ' ] ' + 'For support, please email us at support@tegra.gg or join our Discord server: discord.gg/tegra'
-        };
+const commands = {
+    help: () => '[ ' + new Date().toLocaleString() + ' ] ' + 'Available commands:\n\n' +
+        '― help    : Display this help message\n' +
+        '― about   : About PLEXIFY\n' +
+        '― status  : Check server status\n' +
+        '― plans   : View server plans.\n' +
+        '― start   : Join PLEXIFY.\n' +
+        '― contact : Contact support',
+    about: () => '[ ' + new Date().toLocaleString() + ' ] ' + 'Overvoid is a small free 24/7 host for Minecraft, Node.js, and more, based in the US. We provide free yet reliable hosting solutions for your projects. We also keep all of our code open-source, you can see it at https://github.com/OvervoidLabs',
+    status: () => '[ ' + new Date().toLocaleString() + ' ] ' + 'All systems operational. Network uptime: 99.92491%.',
+    plans: () => '[ ' + new Date().toLocaleString() + ' ] ' + 'Hosting plans:\n\n' +
+        '1. None. We are free, and we use a scalable resources system so that you can upgrade your servers for free.',
+    start: () => '[ ' + new Date().toLocaleString() + ' ] ' + 'Ah, that one is easy. Just go to https://app.overvoid.xyz/ and click the big Login with Discord button. If you need support, have a look at the support command.',
+    contact: () => '[ ' + new Date().toLocaleString() + ' ] ' + 'For support, please email us at support@overvoid.xyz or join our Discord server: discord.gg/overvoid'
+};
 
-        const commandList = Object.keys(commands);
+const commandList = Object.keys(commands);
 
-        async function executeCommand(command) {
-            const [cmd, ...args] = command.split(' ');
-            if (commands[cmd]) {
-                const result = await commands[cmd](args);
-                return result;
-            } else {
-                throw new Error(`Command not found: ${cmd}`);
-            }
-        }
+async function executeCommand(command) {
+    const [cmd, ...args] = command.split(' ');
+    if (commands[cmd]) {
+        const result = await commands[cmd](args);
+        return result;
+    } else {
+        throw new Error(`Command not found: ${cmd}`);
+    }
+}
 
-        function displayOutput(text, isError = false) {
-            const outputElement = document.createElement('div');
-            outputElement.innerHTML = parseColorCodes(text);
-            outputElement.classList.add('output');
-            if (isError) outputElement.classList.add('error');
-            output.appendChild(outputElement);
-            setTimeout(() => outputElement.classList.add('visible'), 10);
-            output.scrollTop = output.scrollHeight;
-        }
+function displayOutput(text, isError = false) {
+    const outputElement = document.createElement('div');
+    outputElement.innerHTML = parseColorCodes(text);
+    outputElement.classList.add('output');
+    if (isError) outputElement.classList.add('error');
+    output.appendChild(outputElement);
+    setTimeout(() => outputElement.classList.add('visible'), 10);
+    output.scrollTop = output.scrollHeight;
+}
 
-        function parseColorCodes(text) {
-            const colorMap = {
-                '&0': '#000000', '&1': '#0000AA', '&2': '#00AA00', '&3': '#00AAAA',
-                '&4': '#AA0000', '&5': '#AA00AA', '&6': '#FFAA00', '&7': '#AAAAAA',
-                '&8': '#555555', '&9': '#5555FF', '&a': '#55FF55', '&b': '#55FFFF',
-                '&c': '#FF5555', '&d': '#FF55FF', '&e': '#FFFF55', '&f': '#FFFFFF',
-            };
+function parseColorCodes(text) {
+    const colorMap = {
+        '&0': '#000000', '&1': '#0000AA', '&2': '#00AA00', '&3': '#00AAAA',
+        '&4': '#AA0000', '&5': '#AA00AA', '&6': '#FFAA00', '&7': '#AAAAAA',
+        '&8': '#555555', '&9': '#5555FF', '&a': '#55FF55', '&b': '#55FFFF',
+        '&c': '#FF5555', '&d': '#FF55FF', '&e': '#FFFF55', '&f': '#FFFFFF',
+    };
 
             return text.replace(/&[0-9a-f]/g, match => `</span><span style="color: ${colorMap[match]}">`)
-                       .replace(/\n/g, '<br>')
-                       + '</span>';
+                        .replace(/\n/g, '<br>')
+                        + '</span>';
         }
 
         function setTime() {
             const el = document.getElementById('time');
             const date = new Date().toLocaleString();
 
-            el.innerHTML = '[ ' + date + ' ] © PLEXIFY Industries, LLC.';
+            el.innerHTML = '[ ' + date + ' ] © OVERVOID Industries, LLC.';
         }
 
         setInterval(setTime, 100);
